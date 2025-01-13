@@ -1,0 +1,134 @@
+tags:
+  - name: /users
+paths:
+  /users:
+    get:
+      tags:
+        - /users
+      summary: Get a list of all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+        '500':
+          description: Internal Server Error
+
+    post:
+      tags:
+        - /users
+      summary: Create a new user
+      operationId: createUser
+      requestBody:
+        description: User creation data
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'reader'
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
+
+  /users/{id}:
+    get:
+      tags:
+        - /users
+      summary: Get a user by ID
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the user to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User details
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+
+  /users/{id}/borrow/{bookId}:
+    post:
+      tags:
+        - /users
+      summary: Borrow a book for a user
+      operationId: borrowBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: user id
+          schema:
+            type: integer
+        - name: bookId
+          in: path
+          required: true
+          description: book id
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Book borrowed successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: User or Book not found
+        '409':
+          description: Book is already borrowed
+        '500':
+          description: Internal Server Error
+
+  /users/{id}/return/{bookId}:
+    post:
+      tags:
+        - /users
+      summary: Return a borrowed book
+      operationId: returnBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: user id
+          schema:
+            type: integer
+        - name: bookId
+          in: path
+          required: true
+          description: book id
+          schema:
+            type: integer
+      requestBody:
+        description: User's score for the book
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                score:
+                  type: integer
+                  example: 7
+      responses:
+        '204':
+          description: Book returned successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: User or Book not found
+        '403':
+          description: Unauthorized request
+        '500':
+          description: Internal Server Error

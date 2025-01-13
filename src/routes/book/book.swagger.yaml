@@ -1,0 +1,77 @@
+tags:
+  - name: /books
+paths:
+  /books:
+    get:
+      tags:
+        - /books
+      summary: Get a list of books
+      description: Retrieve all books.
+      operationId: getBooks
+      responses:
+        '200':
+          description: A list of books
+          content:
+            application/json:
+              schema:
+                type: array
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - /books
+      summary: Create a new book
+      description: Create a new book with the specified details.
+      operationId: createBook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: '1984'
+      responses:
+        '201':
+          description: Book created successfully
+        '400':
+          description: Bad Request (e.g., missing or invalid data)
+        '409':
+          description: Conflict (book already exists)
+        '500':
+          description: Internal Server Error
+
+  /books/{id}:
+    get:
+      tags:
+        - /books
+      summary: Get details of a specific book
+      description: Retrieve details of a book by its ID.
+      operationId: getBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Details of the requested book
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  score:
+                    type: number
+                    format: float
+        '404':
+          description: Book not found
+        '500':
+          description: Internal Server Error

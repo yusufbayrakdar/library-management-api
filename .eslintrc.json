@@ -1,0 +1,39 @@
+{
+	"env": {
+		"browser": false,
+		"node": true,
+		"es2021": true,
+		"mocha": true
+	},
+	"extends": ["airbnb-typescript/base", "plugin:prettier/recommended", "eslint:recommended"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": ["./tsconfig.eslint.json", "./tsconfig.test.json"]
+	},
+	"plugins": ["@typescript-eslint", "import", "unused-imports"],
+	"rules": {
+		"@typescript-eslint/naming-convention": "off",
+		"@typescript-eslint/no-use-before-define": "off",
+		"import/order": [
+			"error",
+			{
+				"groups": [["builtin", "external"], "internal"],
+				"newlines-between": "always",
+				"alphabetize": { "order": "asc", "caseInsensitive": false }
+			}
+		],
+		"padding-line-between-statements": [
+			"error",
+			{ "blankLine": "always", "prev": "import", "next": "*" },
+			{ "blankLine": "any", "prev": "import", "next": "import" }
+		],
+		"unused-imports/no-unused-imports": "error",
+		"prettier/prettier": ["error", { "endOfLine": "auto" }]
+	},
+	"settings": {
+		"import/resolver": {
+			"node": { "extensions": [".ts", ".tsx"] }
+		}
+	},
+	"ignorePatterns": []
+}

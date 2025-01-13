@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+
+# TypeScript
+dist/
+*.tsbuildinfo
+*.js
+*.d.ts
+*.js.map
+
+# Debug/IDE configurations
+.idea/
+.vscode/
+*.log
+
+# macOS
+.DS_Store
+
+# Environment variables
+*.env
+
+# npm/yarn debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Coverage directory used by tools like nyc or istanbul
+coverage/
+.nyc_output/
+.scannerwork/
+
+# Dependency directories
+jspm_packages/
+
+# Cache directories
+.cache/
+.tmp/
+tmp/
+temp/
+
+# Generated files
+docker-compose.yml
