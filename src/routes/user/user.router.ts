@@ -21,6 +21,11 @@ userRouter.post(
 	validator({ schema: bookSchemas.BorrowingParams, source: VALIDATION_SOURCE.PARAMS }),
 	bookController.borrowBook,
 )
-userRouter.post('/:id/return/:bookId', validator({ schema: bookSchemas.BookReturnSchema }), bookController.returnBook)
+userRouter.post(
+	'/:id/return/:bookId',
+	validator({ schema: bookSchemas.BorrowingParams, source: VALIDATION_SOURCE.PARAMS }),
+	validator({ schema: bookSchemas.BookReturnSchema }),
+	bookController.returnBook,
+)
 
 export default userRouter.getRouter()
